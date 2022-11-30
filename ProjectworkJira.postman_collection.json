@@ -1,0 +1,393 @@
+{
+	"info": {
+		"_postman_id": "43b52c16-63b7-4ded-8a04-a99c2082c822",
+		"name": "ProjectworkJira",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24450267"
+	},
+	"item": [
+		{
+			"name": "create_an_issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//get the complete Json response\r",
+							"response=pm.response.json();\r",
+							"\r",
+							"//use the response path to get system id\r",
+							"ticket_id=response.id;\r",
+							"\r",
+							"//save it as a collection  variable\r",
+							"pm.collectionVariables.set(\"C_tid\",ticket_id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n    \"project\":\r\n                {\r\n                    \"key\": \"TEST\"\r\n                },\r\n    \"summary\": \"create issue in RA project\",\r\n    \"description\": \"Creating of an issue using project keys and issue type names using the REST API\",\r\n    \"issuetype\": {\r\n                    \"name\": \"Bug\"\r\n                }\r\n    }\r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issue/",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search_issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issue/{{C_tid}}",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{C_tid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit_an_issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n\r\n        \"description\": \"Bug creation Using REST API for testing\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issue/{{C_tid}}",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{C_tid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_an_issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issue/{{C_tid}}",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{C_tid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search_an_issue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/search?jql=project=\"test\"",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "jql",
+							"value": "project=\"test\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List_all_the_issue_types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// get the response of the jsaon\r",
+							"\r",
+							"//odyData=JSON.parse(responseBody);\r",
+							"response=pm.response.json();\r",
+							"id = response[9].id;\r",
+							"pm.environment.set(\"E_id\",id);\r",
+							"//\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issuetype",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List_the_specific_issuetype_withid",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "rYOOLw1ahgf1Cy21EYx952B1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "thangamlee@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://thangarasuraja.atlassian.net/rest/api/2/issuetype/{{E_id}}",
+					"protocol": "https",
+					"host": [
+						"thangarasuraja",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype",
+						"{{E_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "C_tid",
+			"value": ""
+		}
+	]
+}
